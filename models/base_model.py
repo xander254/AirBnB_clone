@@ -40,7 +40,7 @@ class BaseModel:
 
     def to_dict(self):
         """Returns a dictionary containing all keys/values of dict instance"""
-         # Copy __dict__ and add __class__
+        # Copy __dict__ and add __class__
         obj_dict = self.__dict__.copy()
         obj_dict['__class__'] = self.__class__.__name__
         # Convert datetime attributes to ISO format
