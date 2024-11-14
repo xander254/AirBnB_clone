@@ -16,7 +16,7 @@ class BaseModel:
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
             # Loop through key-value pairs
-            for key, value in kwargs.item():
+            for key, value in kwargs.items():
                 # Ignore class key
                 if key == "__class__":
                     continue
