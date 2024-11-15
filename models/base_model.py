@@ -5,18 +5,16 @@ Base class Module.
 import json
 import uuid
 from datetime import datetime
-#from models import storage
 
 
 class BaseModel:
     """
-    Deffine the BaseModel class with common attributes and methods
+    Define the BaseModel class with common attributes and methods
     """
     def __init__(self, *args, **kwargs):
         """Initialize BaseModel instance"""
         from models import storage
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
-        print("initialized instance")
         if kwargs:
             # Loop through key-value pairs
             for key, value in kwargs.items():
@@ -26,29 +24,24 @@ class BaseModel:
                 if key in ("created_at", "updated_at"):
                     setattr(self, key, datetime.strptime(value, time_format))
                 else:
-                    print("setting attributes afresh")
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
-            print("vals not in kwargs added afresh")
             storage.new(self)
-            print("new file stored")
 
     def __str__(self):
         """Return string representation of the instance"""
         class_name = self.__class__.__name__
-        print("print the class")
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
 
     def save(self):
         """Update updated_at timestamp to current time"""
+        # implemented lazy import 
         from models import storage
         self.updated_at = datetime.now()
-        print("updated at updated to now")
         storage.save()
-        print("saved to storage")
 
     def to_dict(self):
         """Returns a dictionary containing all keys/values of dict instance"""
@@ -58,5 +51,4 @@ class BaseModel:
         # Convert datetime attributes to ISO format
         obj_dict['created_at'] = self.created_at.isoformat()
         obj_dict['updated_at'] = self.updated_at.isoformat()
-        print("changed object to disc")
         return obj_dict
