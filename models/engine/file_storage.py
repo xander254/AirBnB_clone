@@ -35,8 +35,9 @@ class FileStorage:
                 try:
                     obj_dict = json.load(f)
                     for key, value in obj_dict.items():
-                        cls_name = value["__class__"]
-                        if cls_name == "BaseModel":
-                            FileStorage.__objects[key] = BaseModel(**value)
+                        cls_name, obj.id = key.split(".")
+                        cls = eval(cls_name)
+                        instance = cls(**value)
+                        FileStorage.__objects[key] = instance
                 except Exception:
                     pass
