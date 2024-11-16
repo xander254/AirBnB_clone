@@ -4,7 +4,7 @@ File storage class module.
 """
 import json
 import os
-
+from models.base_model import BaseModel
 
 class FileStorage:
     __file_path = "file.json"
@@ -39,8 +39,7 @@ class FileStorage:
                         cls = globals().get(cls_name)
                         if cls:
                             cls = eval(cls_name)
-                            instance = cls(**value)
-                            FileStorage.__objects[key] = instance
+                            self.__objects[key] = cls(**value)
                 except Exception as e:
                     print("Error loading objects {}.".format(e))
         else:
