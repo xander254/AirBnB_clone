@@ -4,8 +4,10 @@ import cmd
 import shlex
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
 
-valid_classes = {"BaseModel": BaseModel}
+
+valid_classes = {"BaseModel": BaseModel, "User": User}
 
 
 class HBNBCommand(cmd.Cmd):
