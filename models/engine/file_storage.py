@@ -19,10 +19,10 @@ class FileStorage:
 
     classes = {
         "BaseModel": BaseModel,
-        "User": User
-        "State": State
-        "City": City
-        "Amenity": Amenity
+        "User": User,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
         "Place": Place
     }
 

@@ -9,7 +9,7 @@ class City(BaseModel):
     """
     a class City that inherits from BaseModel
     """
-    state.id = ""
+    state_id = ""
     name = ""
 
     def __init__(self, *args, **kwargs):
