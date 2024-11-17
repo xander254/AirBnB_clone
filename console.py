@@ -97,22 +97,30 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """
-        Prints all string representation of all instances
-        based or not on the class name
+        Prints all string representations of all instances based on or not on the class name.
+        Supports syntax like User.all() or just all for all instances.
         """
-        argument = shlex.split(arg)
-        objects = storage.all()
-
-        if len(argument) == 0:
-            for key, value in objects.items():
-                print(str(value))
-        elif argument[0] not in valid_classes:
-            print("** class doesn't exist **")
+        if '(' in arg and ')' in arg:
+            class_name = arg.split('.')[0]
+        
+            if class_name in valid_classes:
+                cls = valid_classes[class_name]
+            for obj in cls.all():
+                print(str(obj))
+            else:
+                print("** class doesn't exist **")
         else:
-            for key, value in objects.items():
-                if key.split('.')[0] == argument[0]:
-                    print(str(value))
-            
+            argument = shlex.split(arg)  # Split the input into arguments
+            if len(argument) == 0:
+                for obj in storage.all().values():
+                    print(str(obj))
+            elif argument[0] not in valid_classes:
+                print("** class doesn't exist **")
+            else:
+                cls = valid_classes[argument[0]]
+            for obj in cls.all():
+                print(str(obj))
+
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id."""
