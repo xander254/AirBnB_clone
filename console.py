@@ -12,7 +12,6 @@ from models.place import Place
 from models.review import Review
 
 
-
 valid_classes = {
     "BaseModel": BaseModel,
     "User": User,
@@ -97,12 +96,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """
-        Prints all string representations of all instances based on or not on the class name.
-        Supports syntax like User.all() or just all for all instances.
+        Prints all string representations of all instances.
+        Supports syntax like User.all()
         """
         if '(' in arg and ')' in arg:
             class_name = arg.split('.')[0]
-        
+
             if class_name in valid_classes:
                 cls = valid_classes[class_name]
             for obj in cls.all():
@@ -120,7 +119,6 @@ class HBNBCommand(cmd.Cmd):
                 cls = valid_classes[argument[0]]
             for obj in cls.all():
                 print(str(obj))
-
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id."""
@@ -156,6 +154,7 @@ class HBNBCommand(cmd.Cmd):
             pass
         setattr(objct, attr_name, attr_value)
         objct.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
