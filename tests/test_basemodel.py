@@ -49,6 +49,50 @@ class TestBaseModel(unittest.TestCase):
         expected_output = f"[BaseModel] ({model.id}) {model.__dict__}"
         self.assertEqual(str(model), expected_output)
 
+    def test_init_with_kwargs(self):
+        """test init with dict"""
+        data = {
+            "id": "1234-5678",
+            "created_at": "2024-11-17T10:00:00.000000",
+            "updated_at": "2024-11-17T10:10:00.000000",
+            "name": "MyBaseModel"
+        }
+        instance = BaseModel(**data)
+
+        self.assertEqual(instance.id, "1234-5678")
+        self.assertEqual(instance.name, "MyBaseModel")
+        self.assertIsInstance(instance.created_at, datetime)
+        self.assertIsInstance(instance.updated_at, datetime)
+
+    def test_ignore_class_key_in_kwargs(self):
+        """test ingonre __class__ key"""
+        data = {
+            "__class__": "BaseModel",
+            "id": "9876-5432",
+            "created_at": "2024-11-17T10:00:00.000000",
+            "updated_at": "2024-11-17T10:10:00.000000"
+        }
+        instance = BaseModel(**data)
+
+        self.assertEqual(instance.id, "9876-5432")
+        #self.assertFalse(hasattr(instance, "__class__"))
+
+    def test_default_init(self):
+        """test default init"""
+        instance = BaseModel()
+        
+        self.assertIsNotNone(instance.id)
+        self.assertIsInstance(instance.created_at, datetime)
+        self.assertIsInstance(instance.updated_at, datetime)
+
+    def test_creatd_at_coversion(self):
+        """test conversion of created_at to iso formating"""
+        data = {"created_at": "2024-11-18T04:35:15.253643"}
+
+        instance = BaseModel(**data)
+
+        self.assertIsInstance(instance.created_at, datetime)
+        self.assertEqual(instance.created_at.isoformat(), "2024-11-18T04:35:15.253643")
 
 
 
