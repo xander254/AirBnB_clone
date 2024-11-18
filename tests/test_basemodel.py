@@ -5,7 +5,6 @@ from models.base_model import BaseModel
 from datetime import datetime
 
 
-
 class TestBaseModel(unittest.TestCase):
     """Test methods"""
     def test_initialization(self):
@@ -39,9 +38,16 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn('created_at', model_dict)
         self.assertIn('updated_at', model_dict)
         self.assertIn('__class__', model_dict)
-        self.assertEqual(model_dict['__class__'], 'BaseModel')
-        self.assertEqual(model_dict['created_at'], model.created_at.isoformat())
-        self.assertEqual(model_dict['updated_at'], model.created_at.isoformat())
+        self.assertEqual(
+            model_dict['__class__'], 'BaseModel')
+        self.assertEqual(
+            model_dict['created_at'],
+            model.created_at.isoformat()
+        )
+        self.assertEqual(
+            model_dict['updated_at'],
+            model.created_at.isoformat()
+        )
 
     def test_str_method(self):
         """Test return of string representstion"""
@@ -75,12 +81,11 @@ class TestBaseModel(unittest.TestCase):
         instance = BaseModel(**data)
 
         self.assertEqual(instance.id, "9876-5432")
-        #self.assertFalse(hasattr(instance, "__class__"))
 
     def test_default_init(self):
         """test default init"""
         instance = BaseModel()
-        
+
         self.assertIsNotNone(instance.id)
         self.assertIsInstance(instance.created_at, datetime)
         self.assertIsInstance(instance.updated_at, datetime)
@@ -92,8 +97,10 @@ class TestBaseModel(unittest.TestCase):
         instance = BaseModel(**data)
 
         self.assertIsInstance(instance.created_at, datetime)
-        self.assertEqual(instance.created_at.isoformat(), "2024-11-18T04:35:15.253643")
-
+        self.assertEqual(
+            instance.created_at.isoformat(),
+            "2024-11-18T04:35:15.253643"
+        )
 
 
 if __name__ == '__main__':
