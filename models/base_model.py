@@ -5,6 +5,7 @@ Base class Module.
 import json
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
