@@ -11,6 +11,7 @@ class Amenity(BaseModel):
     """
 
     name = ""
+
     def __init__(self, *args, **kwargs):
         """ Innit new user method """
         super().__init__(*args, **kwargs)

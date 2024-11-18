@@ -12,7 +12,6 @@ from models.place import Place
 from models.review import Review
 
 
-
 valid_classes = {
     "BaseModel": BaseModel,
     "User": User,
@@ -57,7 +56,9 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
 
     def do_show(self, arg):
-        """Prints string representation of an instance(class name and id)"""
+        """
+        Prints string representation of an instance(class name & id)
+        """
         argument = shlex.split(arg)
         if len(argument) == 0:
             print("** class name missing **")
@@ -97,22 +98,22 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """
-        Prints all string representation of all instances
-        based or not on the class name
+        Prints all string representations of all instances.
+        Supports syntax like User.all()
         """
         argument = shlex.split(arg)
+
         objects = storage.all()
 
         if len(argument) == 0:
-            for key, value in objects.items():
-                print(str(value))
+            for obj in objects.values():
+                print(str(obj))
         elif argument[0] not in valid_classes:
-            print("** class doesn't exist **")
+            print("** class doesn't exist**")
         else:
-            for key, value in objects.items():
-                if key.split('.')[0] == argument[0]:
-                    print(str(value))
-            
+            for obj in objects.values():
+                if obj.__class__.__name__ == argument[0]:
+                    print(str(obj))
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id."""
@@ -148,6 +149,7 @@ class HBNBCommand(cmd.Cmd):
             pass
         setattr(objct, attr_name, attr_value)
         objct.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

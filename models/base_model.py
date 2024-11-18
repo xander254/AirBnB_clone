@@ -39,7 +39,6 @@ class BaseModel:
 
     def save(self):
         """Update updated_at timestamp to current time"""
-        # implemented lazy import 
         from models import storage
         self.updated_at = datetime.now()
         storage.save()
