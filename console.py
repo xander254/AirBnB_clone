@@ -56,7 +56,9 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
 
     def do_show(self, arg):
-        """Prints string representation of an instance(class name and id)"""
+        """
+        Prints string representation of an instance(class name & id)
+        """
         argument = shlex.split(arg)
         if len(argument) == 0:
             print("** class name missing **")
@@ -99,26 +101,19 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representations of all instances.
         Supports syntax like User.all()
         """
-        if '(' in arg and ')' in arg:
-            class_name = arg.split('.')[0]
+        argument = shlex.split(arg)
 
-            if class_name in valid_classes:
-                cls = valid_classes[class_name]
-            for obj in cls.all():
+        objects = storage.all()
+
+        if len(argument) == 0:
+            for obj in objects.values():
                 print(str(obj))
-            else:
-                print("** class doesn't exist **")
+        elif argument[0] not in valid_classes:
+            print("** class doesn't exist**")
         else:
-            argument = shlex.split(arg)  # Split the input into arguments
-            if len(argument) == 0:
-                for obj in storage.all().values():
+            for obj in objects.values():
+                if obj.__class__.__name__ == argument[0]:
                     print(str(obj))
-            elif argument[0] not in valid_classes:
-                print("** class doesn't exist **")
-            else:
-                cls = valid_classes[argument[0]]
-            for obj in cls.all():
-                print(str(obj))
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id."""
