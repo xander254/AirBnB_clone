@@ -22,6 +22,7 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = 0.0
+
     def __init__(self, *args, **kwargs):
         """ Innit new user method """
         super().__init__(*args, **kwargs)

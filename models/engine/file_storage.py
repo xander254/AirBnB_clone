@@ -19,10 +19,10 @@ class FileStorage:
 
     classes = {
         "BaseModel": BaseModel,
-        "User": User
-        "State": State
-        "City": City
-        "Amenity": Amenity
+        "User": User,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
         "Place": Place
     }
 
@@ -47,7 +47,9 @@ class FileStorage:
     def reload(self):
         """Deserializes the JSON file to __objects if the file exists."""
         if os.path.isfile(FileStorage.__file_path):
-            with open(FileStorage.__file_path, "r", encoding="utf-8") as JsonFile:
+            with open(
+                FileStorage.__file_path, "r", encoding="utf-8"
+            ) as JsonFile:
                 try:
                     obj_dict = json.load(JsonFile)
                     for key, value in obj_dict.items():
