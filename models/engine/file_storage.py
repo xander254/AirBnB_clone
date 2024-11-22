@@ -4,7 +4,7 @@ File storage class module.
 """
 import json
 import os
-from models.base_model import BaseModel
+#from models.base_model import BaseModel
 from models.user import User
 from models.state import State
 from models.city import City
@@ -37,7 +37,7 @@ class FileStorage:
 
     def save(self):
         """Serializes __objects to the JSON file (__file_path)."""
-        #from models.base_model import BaseModel
+        from models.base_model import BaseModel
         obj_dict = {}
         for key, obj in FileStorage.__objects.items():
             obj_dict[key] = obj.to_dict()
@@ -46,6 +46,7 @@ class FileStorage:
 
     def reload(self):
         """Deserializes the JSON file to __objects if the file exists."""
+        from models.base_model import BaseModel
         if os.path.isfile(FileStorage.__file_path):
             with open(
                 FileStorage.__file_path, "r", encoding="utf-8"
