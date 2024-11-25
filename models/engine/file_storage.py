@@ -4,7 +4,7 @@ File storage class module.
 """
 import json
 import os
-from models.base_model import BaseModel
+#from models.base_model import BaseModel
 from models.user import User
 from models.state import State
 from models.city import City
@@ -46,6 +46,7 @@ class FileStorage:
 
     def reload(self):
         """Deserializes the JSON file to __objects if the file exists."""
+        from models.base_model import BaseModel
         if os.path.isfile(FileStorage.__file_path):
             with open(
                 FileStorage.__file_path, "r", encoding="utf-8"
@@ -53,12 +54,9 @@ class FileStorage:
                 try:
                     obj_dict = json.load(JsonFile)
                     for key, value in obj_dict.items():
-                        cls_name, obj_id = key.split(".")
+                        cls_name = key.split(".")
                         cls = globals().get(cls_name)
                         if cls:
-                            cls = eval(cls_name)
                             self.__objects[key] = cls(**value)
                 except Exception as e:
                     print("Error loading objects {}.".format(e))
-        else:
-            print("The file {} was not found".format(FileStorage.__file_path))
