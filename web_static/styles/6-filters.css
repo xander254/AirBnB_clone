@@ -1,9 +1,3 @@
-.container {
-  max-width: 1000px;
-  padding-top: 30px;
-  margin-bottom: 30px;
-  margin: auto;
-}
 .filters {
   color: rgb(3, 0, 0);
   height: 70px;
@@ -68,5 +62,18 @@ button:hover {
 .locations:hover .popover,
 .amenities:hover .popover {
   display: block;
-  background-color: #DDDDDD;
+  background-color: #dddddd;
 }
+h3 {
+  font-weight: 600;
+  margin-bottom: 0;
+}
+h4 {
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: 0;
+}
+h2 {
+  font-size: 16px;
+}
+
