@@ -64,16 +64,35 @@ button:hover {
   display: block;
   background-color: #dddddd;
 }
-h3 {
+.locations h3, .amenities h3 {
   font-weight: 600;
   margin-bottom: 0;
 }
-h4 {
+.locations h4, .amenities h4 {
   font-weight: 400;
   font-size: 14px;
   margin-top: 0;
 }
-h2 {
+.amenities h2 {
   font-size: 16px;
 }
 
+@media (max-width: 600px){
+  .filter{
+  height: 120px;
+  flex-wrap: column-wrap;
+  }
+  .filters button {
+    top: 110px;
+    right: 120px;
+ 
+  }
+  .places{
+  top: 60px;
+  }
+  .locations:hover .popover,
+  .amenities:hover .popover {
+  display: block;
+  background-color: #dddddd;
+  }
+}

@@ -1,0 +1,45 @@
+.places .amenities{
+margin-top: 40px;
+text-align: left;
+}
+.places .amenities .amenity_heading{
+font-size: 16px;
+border-bottom: 1px solid #DDDDDD;
+text-align: left;
+}
+.places .amenities ul{
+list-style-type: none;
+padding: 0;
+}
+.places .amenities li{
+display: flex;
+align-items: flex-start;
+padding: 0;
+margin: 10px;
+}
+.places .amenities img.list_amenities{
+width: 20px;
+height: 20px;
+margin-right: 10px;
+}
+.places .reviews .review_heading{
+font-size: 16px;
+border-bottom: 1px solid #DDDDDD;
+text-align: left;
+}
+.places .reviews ul{
+list-style-type: none;
+padding: 0;
+margin-top: 0;
+}
+.places .reviews li{
+display: flex;
+align-items: flex-start;
+}
+.reviews h3{
+margin-top: 20px;
+margin-bottom: 0;
+}
+.reviews p{
+margin: 0;
+}
